@@ -1,0 +1,3 @@
+
+ipython == 7.21.0 
+asyncua == 0.9.11  
