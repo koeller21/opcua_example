@@ -9,8 +9,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Build the hello-world Docker image
+    - name: Build the Docker image
       run: |
-        echo $CR_PAT | docker login ghcr.io -u koeller21 --password-stdin
+        docker login ghcr.io -u koeller21 -p $CR_PAT
       env:
         CR_PAT: ${{ secrets.PACKAGESECRET }}
