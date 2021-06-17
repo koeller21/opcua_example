@@ -11,6 +11,6 @@ jobs:
 
     - name: Build the hello-world Docker image
       run: |
-        echo $PACKAGESECRET | docker login ghcr.io -u koeller21 --password-stdin
+        echo $CR_PAT | docker login ghcr.io -u koeller21 --password-stdin
       env:
         CR_PAT: ${{ secrets.PACKAGESECRET }}
