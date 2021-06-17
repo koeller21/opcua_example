@@ -14,6 +14,7 @@ from asyncua.common.node import Node
 
 @uamethod
 def setMode(parent, mode):
+    print("Method call with param: " + str(mode))
     return True
 
 
@@ -53,13 +54,13 @@ async def main():
         # get brows name of each of them
         browse_name = await child.read_browse_name()
 
-        # if browse_name is bloody sumcomponents
+        # if browse_name is subcomponents
         if browse_name.Name == "SubComponents":
 
             # then delete child of subcomponents as this is a mandatory placeholder
             subcomponent_idf = await child.get_child(["3:SubComponent_Identifier"])
             
-            # delete that badboy
+            # delete that bad boy
             await subcomponent_idf.delete()
 
 
@@ -86,6 +87,11 @@ async def main():
     washing_machine_rpm = await washing_machine.get_child(["2:ParameterSet", "3:RPM"])
     washing_machine_currentmode = await washing_machine.get_child(["2:ParameterSet", "3:CurrentMode"])
     washing_machine_door_doorOpened = await washing_machine_door.get_child(["2:ParameterSet", "3:DoorOpened"])
+
+
+    # link method with callback function
+    washing_machine_set_mode_func = await washing_machine.get_child(["2:MethodSet", "3:SetMode"])
+    server.link_method(washing_machine_set_mode_func, setMode)
 
 
 
