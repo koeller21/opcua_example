@@ -22,7 +22,8 @@ async def main():
     
     logging.basicConfig(level=logging.DEBUG)
     server = Server()
-    server.name = "Washing Machine Demo Server"
+    server.set_server_name("Washing Machine")
+    server.set_endpoint("opc.tcp://0.0.0.0:4841/")
     
 
     await server.init()
